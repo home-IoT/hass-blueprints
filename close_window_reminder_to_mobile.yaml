@@ -1,14 +1,10 @@
 # 
 # Home Assistant Automation Blueprint
 #
-# Two Reminders to close a window or door after opening it if the temperature outside
+# Two Reminders to close a window or door after opening it, if the temperature outside
 # is below a certain degree. 
 #
-# NOTE: I don't yet know of a good way to limit the selection of mobile devices, so 
-#       I am using the manufacturer name (currently 'Apple' under 'device_identifier' selector).
-#       Change this accordingly or kindly teach me how to make it better. :-) 
-#
-# Revision 1
+# Revision 2
 # Roozbeh Farahbod, Jan. 2021
 #
 
@@ -54,11 +50,13 @@ blueprint:
           max: 25
           mode: slider
     device_identifier:
-      name: Device
-      description: 'The device to receive the notification.'
+      name: Device to notify
+      description: >
+        The device to receive the notification; it needs to run the official 
+        Home Assistant app to receive notifications.
       selector: 
         device:
-          manufacturer: 'Apple'
+          integration: mobile_app
 
 # We will have two triggers, for the two different reminders. 
 # However, a reminder will be ignored if the door or window is already closed by then. 
