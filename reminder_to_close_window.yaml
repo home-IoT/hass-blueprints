@@ -1,8 +1,8 @@
 # 
 # Home Assistant Automation Blueprint
 #
-# Two Reminders to close a window or door after opening it, if the temperature outside
-# is below a certain degree. 
+# Sends two notifications to close a window or door after opening it, 
+# if the temperature outside is below a certain degree. 
 #
 # Revision 2
 # Roozbeh Farahbod, Jan. 2021
@@ -80,7 +80,7 @@ trigger:
 
 # Two conditions:
 # 1. The door or window should still be open. 
-# 2. The outside temperature must be below the set value. 
+# 2. The temperature reading must be below the set value. 
 condition:
 - condition: state
   entity_id: !input contact_sensor
