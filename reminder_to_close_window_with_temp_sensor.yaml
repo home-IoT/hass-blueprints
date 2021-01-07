@@ -1,7 +1,7 @@
 # 
 # Home Assistant Automation Blueprint
 #
-# Two Notifications to close a window or door after opening it, 
+# Sends two notifications to close a window or door after opening it, 
 # if the temperature reading of a given sensor is below a certain degree. 
 #
 # Revision 1
