@@ -1,0 +1,48 @@
+# 
+# Home Assistant Automation Blueprint
+#
+# Stops and opens a closing blind/cover, if the corresponding window is 
+# opened while the blind is closing.
+#
+# Revision 1
+# Roozbeh Farahbod, Jan. 2021
+#
+
+blueprint:
+  name: Blind Safety
+  description: If a window is opened while its blind is closing, re-open the blind. 
+  domain: automation
+  input:
+    cover_entity:
+      name: Blind
+      description: The blind (cover) to be controlled. 
+      selector:
+        entity:
+          domain: cover
+    window_sensor:
+      name: Window sensor
+      description: The window sensor corresponding to the blind. 
+      selector:
+        entity:
+          domain: binary_sensor
+
+# Trigger: If the window is opened...
+trigger:
+- platform: state
+  entity_id: !input window_sensor
+  from: 'off'
+  to: 'on'
+
+# Condition: ... while the blind is closing,...
+condition:
+- condition: state
+  entity_id: !input cover_entity
+  state: closing
+
+# Action: ..., open the closing blind. 
+action:
+- service: cover.open_cover
+  data: {}
+  entity_id: !input cover_entity
+
+mode: single
